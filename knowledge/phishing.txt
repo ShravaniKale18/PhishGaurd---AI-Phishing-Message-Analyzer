@@ -1,0 +1,19 @@
+Phishing is a cyberattack technique where an attacker attempts to
+deceive a person into revealing sensitive information or interacting
+with malicious content.
+
+Common phishing indicators include requests for passwords, account
+verification, OTPs, banking information, payment information, or
+other sensitive credentials.
+
+Phishing messages frequently impersonate banks, online services,
+delivery companies, government organizations, or popular websites.
+
+Unexpected requests for sensitive information should be treated
+with caution.
+
+A legitimate organization generally should not require users to
+share passwords or one-time passwords through an unsolicited message.
+
+Common phishing categories include credential phishing, financial
+phishing, account takeover attempts, prize scams, and impersonation.

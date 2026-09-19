@@ -1,0 +1,16 @@
+streamlit
+python-dotenv
+requests
+pandas
+plotly
+tldextract
+validators
+huggingface-hub
+
+
+langchain
+langchain-core
+langchain-community
+langchain-huggingface
+sentence-transformers
+faiss-cpu

@@ -1,0 +1,19 @@
+Suspicious URLs can contain characteristics associated with phishing
+or other malicious activity.
+
+Potential warning signs include unusually long URLs, excessive
+subdomains, IP addresses instead of recognizable domain names,
+unexpected URL parameters, and misleading words.
+
+The presence of HTTPS alone does not prove that a website is safe.
+A phishing website can also use HTTPS.
+
+Users should inspect the actual domain name and avoid clicking
+unexpected links.
+
+A domain that visually resembles a trusted organization may still
+be fraudulent.
+
+When a link is received unexpectedly, users should navigate directly
+to the organization's official website or application instead of
+using the provided link.

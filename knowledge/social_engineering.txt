@@ -1,0 +1,20 @@
+Social engineering attacks manipulate people psychologically rather
+than relying only on technical vulnerabilities.
+
+Common techniques include urgency, fear, authority, rewards,
+threats, curiosity, and pressure.
+
+Urgency may appear as phrases suggesting that an account will be
+closed or suspended unless immediate action is taken.
+
+Threat-based messages may claim that the recipient will lose access,
+face penalties, or experience account restrictions.
+
+Reward-based scams may claim that the recipient has won a prize,
+refund, reward, or special offer.
+
+Attackers may impersonate trusted organizations to make requests
+appear legitimate.
+
+Users should independently verify suspicious requests through an
+official website, application, phone number, or other trusted channel.
