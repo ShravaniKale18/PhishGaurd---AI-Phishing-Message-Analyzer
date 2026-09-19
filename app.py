@@ -9,8 +9,6 @@ from analyzer import (
 from llm_analyzer import analyze_with_llm
 
 
-# PAGE CONFIG
-
 st.set_page_config(
     page_title="PhishGuard | AI Phishing Analyzer",
     page_icon="🛡️",
@@ -18,13 +16,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-
-# CUSTOM CSS
-
 st.markdown("""
 <style>
-
-/* ---------- GLOBAL ---------- */
 
 .stApp {
     background: #0b1120;
@@ -36,9 +29,6 @@ st.markdown("""
     padding-top: 2rem;
     padding-bottom: 3rem;
 }
-
-
-/* ---------- HEADER ---------- */
 
 .hero {
     padding: 30px 35px;
@@ -68,9 +58,6 @@ st.markdown("""
     font-size: 45px;
 }
 
-
-/* ---------- SECTION HEADINGS ---------- */
-
 .section-title {
     font-size: 21px;
     font-weight: 700;
@@ -79,9 +66,6 @@ st.markdown("""
     margin-bottom: 12px;
 }
 
-
-/* ---------- INPUT CARD ---------- */
-
 .input-card {
     background: #111827;
     border: 1px solid #263653;
@@ -89,9 +73,6 @@ st.markdown("""
     padding: 22px;
     margin-top: 10px;
 }
-
-
-/* ---------- RESULT CARDS ---------- */
 
 .metric-card {
     background: #111827;
@@ -113,9 +94,6 @@ st.markdown("""
     font-weight: 800;
     color: #ffffff;
 }
-
-
-/* ---------- RISK BADGES ---------- */
 
 .risk-high {
     display: inline-block;
@@ -144,9 +122,6 @@ st.markdown("""
     font-weight: 700;
 }
 
-
-/* ---------- INFO BOX ---------- */
-
 .info-card {
     background: #0f172a;
     border: 1px solid #263653;
@@ -165,16 +140,10 @@ st.markdown("""
     font-size: 14px;
 }
 
-
-/* ---------- SIDEBAR ---------- */
-
 section[data-testid="stSidebar"] {
     background: #080d18;
     border-right: 1px solid #1e293b;
 }
-
-
-/* ---------- BUTTON ---------- */
 
 .stButton > button {
     width: 100%;
@@ -184,16 +153,10 @@ section[data-testid="stSidebar"] {
     font-weight: 700;
 }
 
-
-/* ---------- TEXT AREA / INPUT ---------- */
-
 textarea,
 input {
     border-radius: 10px !important;
 }
-
-
-/* ---------- FOOTER ---------- */
 
 .footer {
     text-align: center;
@@ -207,8 +170,6 @@ input {
 </style>
 """, unsafe_allow_html=True)
 
-
-# SIDEBAR
 
 with st.sidebar:
 
@@ -233,7 +194,7 @@ with st.sidebar:
     **01** → Input Analysis  
     **02** → Rule-Based Detection  
     **03** → Risk Scoring  
-    **04** → AI Analysis  
+    **04** → RAG + AI Analysis  
     **05** → Security Recommendation
     """)
 
@@ -250,6 +211,7 @@ with st.sidebar:
     - Financial requests
     - Suspicious URLs
     - URL structure analysis
+    - RAG cybersecurity knowledge
     - AI-powered explanation
     """)
 
@@ -261,8 +223,6 @@ with st.sidebar:
         "that a message or URL is malicious."
     )
 
-
-# HERO HEADER
 
 st.markdown("""
 <div class="hero">
@@ -290,8 +250,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# INPUT SECTION
-
 st.markdown(
     '<div class="section-title">🔍 What would you like to analyze?</div>',
     unsafe_allow_html=True
@@ -305,9 +263,10 @@ input_type = st.radio(
 )
 
 
-# INPUT
-
-st.markdown('<div class="input-card">', unsafe_allow_html=True)
+st.markdown(
+    '<div class="input-card">',
+    unsafe_allow_html=True
+)
 
 if input_type == "💬 Message":
 
@@ -331,10 +290,11 @@ else:
         label_visibility="visible"
     )
 
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown(
+    '</div>',
+    unsafe_allow_html=True
+)
 
-
-# ANALYZE BUTTON
 
 st.write("")
 
@@ -345,8 +305,6 @@ analyze_clicked = st.button(
 )
 
 
-# ANALYSIS
-
 if analyze_clicked:
 
     if not user_input.strip():
@@ -356,8 +314,6 @@ if analyze_clicked:
         )
 
     else:
-
-        # RULE BASED ANALYSIS
 
         with st.spinner("Running security checks..."):
 
@@ -370,18 +326,12 @@ if analyze_clicked:
         indicators = result["indicators"]
         risk = get_risk_level(score)
 
-
-        # RESULT HEADER
-
         st.divider()
 
         st.markdown(
             '<div class="section-title">📊 Security Analysis</div>',
             unsafe_allow_html=True
         )
-
-
-        # METRICS
 
         col1, col2, col3 = st.columns(3)
 
@@ -401,7 +351,6 @@ if analyze_clicked:
                 """,
                 unsafe_allow_html=True
             )
-
 
         with col2:
 
@@ -429,7 +378,6 @@ if analyze_clicked:
                 unsafe_allow_html=True
             )
 
-
         with col3:
 
             st.markdown(
@@ -447,20 +395,12 @@ if analyze_clicked:
                 unsafe_allow_html=True
             )
 
-
-        # =================================================
-        # SCORE BAR
-        # =================================================
-
         st.write("")
 
         st.progress(
             min(score / 100, 1.0),
             text=f"Risk assessment: {score}%"
         )
-
-
-        # DETECTED INDICATORS
 
         st.markdown(
             '<div class="section-title">🔎 Detected Indicators</div>',
@@ -492,9 +432,6 @@ if analyze_clicked:
                 "✓ No obvious phishing indicators were detected "
                 "by the rule-based analyzer."
             )
-
-
-        # AI ANALYSIS
 
         st.markdown(
             '<div class="section-title">🤖 PhishGuard AI Analysis</div>',
@@ -535,7 +472,9 @@ if analyze_clicked:
 
                     st.caption(
                         f"Technical error: {e}"
-                     # SAFETY RECOMMENDATI  st.markdown(
+                    )
+
+        st.markdown(
             '<div class="section-title">🛡️ Safety Reminder</div>',
             unsafe_allow_html=True
         )
@@ -548,8 +487,6 @@ if analyze_clicked:
             "official app or website."
         )
 
-
-# FOOTER
 
 st.markdown(
     """
